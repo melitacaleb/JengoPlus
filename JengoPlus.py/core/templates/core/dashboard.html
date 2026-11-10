@@ -1,7 +1,0 @@
-{% extends "core/base.html" %}{% block body %}
-<div class="d-flex justify-content-between"><h5>Dashboard</h5><a href="{% url 'claims' %}" class="btn btn-warning btn-sm">{{ pending }} pending claims</a></div>
-{% if flags %}<div class="alert alert-warning"><b>For review</b> (indicators, not proof of wrongdoing)<ul class="mb-0">{% for f in flags %}<li>{{ f }}</li>{% endfor %}</ul></div>{% endif %}
-<div class="table-responsive"><table class="table table-sm bg-white"><tr><th>Task</th><th>Supervisor</th><th>Budget</th><th>Funds confirmed</th><th>Approved</th><th>Pending</th><th>Returned</th><th>Held</th><th>Remaining</th></tr>
-{% for t in tasks %}<tr><td>{{ t.title }}<br><small>{{ t.project }}</small></td><td>{{ t.supervisor }}</td><td>{{ t.budget }}</td><td>{{ t.funds_confirmed }}</td><td>{{ t.approved }}</td><td>{{ t.pending }}</td><td>{{ t.returned }}</td><td>{{ t.held }}</td><td>{{ t.budget_remaining }}</td></tr>{% endfor %}</table></div>
-<h6>Recent attendance</h6><ul class="list-group mb-3">{% for s in sessions %}<li class="list-group-item"><a href="{% url 'session' s.pk %}">{{ s.date }} {{ s.project }}</a> &middot; {{ s.supervisor }} &middot; headcount {{ s.headcount }}{% if s.over_expected %} <span class="badge bg-danger">over plan</span>{% endif %}</li>{% endfor %}</ul>
-<h6>Audit trail</h6><ul class="small">{% for a in audit %}<li>{{ a.created|date:"d M H:i" }} {{ a.actor }}: {{ a.action }} {{ a.detail }}</li>{% endfor %}</ul>{% endblock %}

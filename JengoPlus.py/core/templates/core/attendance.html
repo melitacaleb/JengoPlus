@@ -1,8 +1,0 @@
-{% extends "core/base.html" %}{% block body %}
-<h5>{{ project }} &mdash; {{ session.date }}</h5><p>Headcount: <b>{{ session.headcount }}</b>{% if session.submitted %} (submitted){% endif %}</p>
-{% if not session.submitted %}<form method="post" enctype="multipart/form-data" class="card card-body mb-3">{% csrf_token %}
-<select name="worker" class="form-select mb-2" required><option value="">Select worker</option>{% for w in workers %}<option value="{{ w.pk }}">{{ w }}</option>{% endfor %}</select>
-<input type="file" name="photo" accept="image/*" capture="environment" class="form-control mb-2" required>
-<button class="btn btn-primary">Record present</button></form>
-<form method="post">{% csrf_token %}<input type="hidden" name="action" value="submit"><button class="btn btn-success">Submit session</button></form>{% endif %}
-<ul class="list-group mt-3">{% for r in records %}<li class="list-group-item">{{ r.worker }} <small class="text-muted">{{ r.captured_at|time }}</small></li>{% endfor %}</ul>{% endblock %}
