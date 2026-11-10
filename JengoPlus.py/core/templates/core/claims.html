@@ -1,0 +1,5 @@
+{% extends "core/base.html" %}{% block body %}<h5>Pending expense claims</h5>
+{% for c in claims %}<div class="card card-body mb-2"><b>{{ c.amount }}</b> {{ c.category }} to {{ c.payee }} &middot; {{ c.task }}<small>by {{ c.submitted_by }} on {{ c.date }}: {{ c.description }}</small>
+<a href="{% url 'evidence' c.receipt.name %}" target="_blank">View receipt</a>
+<form method="post" action="{% url 'review' c.pk %}" class="d-flex gap-2 mt-2">{% csrf_token %}<input name="reason" class="form-control" placeholder="Reason (required to reject)">
+<button name="decision" value="approved" class="btn btn-success">Approve</button><button name="decision" value="rejected" class="btn btn-danger">Reject</button></form></div>{% empty %}<p>Nothing pending.</p>{% endfor %}{% endblock %}

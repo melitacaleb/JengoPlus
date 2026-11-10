@@ -1,0 +1,7 @@
+{% extends "core/base.html" %}{% block body %}
+<h5>My sites</h5>{% for p in projects %}<div class="card card-body mb-2 d-flex flex-row justify-content-between"><span>{{ p.name }}</span>
+<a class="btn btn-primary btn-sm" href="{% url 'attendance' p.pk %}">Today's attendance</a></div>{% empty %}<p>No sites assigned.</p>{% endfor %}
+<h5 class="mt-4">My tasks</h5>{% for t in tasks %}<div class="card card-body mb-2"><b>{{ t.title }}</b>
+<small>{{ t.project }} &middot; budget {{ t.budget }} &middot; remaining {{ t.budget_remaining }}</small>
+<div class="mt-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'submit' t.pk 'expense' %}">Submit expense</a>
+<a class="btn btn-outline-success btn-sm" href="{% url 'submit' t.pk 'progress' %}">Report progress</a></div></div>{% empty %}<p>No tasks.</p>{% endfor %}{% endblock %}

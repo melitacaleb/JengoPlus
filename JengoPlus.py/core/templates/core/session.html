@@ -1,0 +1,2 @@
+{% extends "core/base.html" %}{% block body %}<h5>{{ s.project }} {{ s.date }} &mdash; {{ s.supervisor }} &mdash; {{ s.headcount }} present</h5>
+<div class="row">{% for r in records %}<div class="col-6 col-md-3 mb-3"><div class="card"><img class="card-img-top" src="{% url 'evidence' r.photo.name %}"><div class="card-body p-2 small">{{ r.worker }}<br>{{ r.captured_at }}</div></div></div>{% endfor %}</div>{% endblock %}
